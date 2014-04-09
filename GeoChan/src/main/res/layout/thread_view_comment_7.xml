@@ -15,7 +15,7 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"
@@ -35,7 +35,7 @@
     
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"
@@ -45,7 +45,7 @@
     
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"
@@ -55,7 +55,7 @@
     
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"
@@ -65,7 +65,7 @@
     
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"
@@ -75,7 +75,7 @@
     
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="7dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/relative_inflater"
         android:layout_alignParentTop="true"

@@ -68,12 +68,12 @@ import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 /**
  * Fragment which displays the contents of a ThreadComment and performs all
  * actions on the objects in that ThreadComment.
- * 
+ *
  * @author Henry Pabst
  * @author Artem Chikin
  */
 public class ThreadViewFragment extends Fragment implements OnRefreshListener, UpdateDialogListenerInterface {
-	private BroadcastReceiver updateReceiver;
+    private BroadcastReceiver updateReceiver;
     private PullToRefreshLayout pullToRefreshLayout;
     private ListView threadView;
     private ThreadViewAdapter adapter;
@@ -85,88 +85,90 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     private PreferencesManager prefManager = null;
     private int container;
     private int isFavCom;
-	private boolean refresh = false;
+    private boolean refresh = false;
     private static int locSortFlag = 0;
 
     /**
      * Gets the fragment arguments, retrieves correct
      * ThreadComment object from either ThreadList or Cache or FavouritesLog,
      * Starts the refresh from server.
+     *
      * @param savedInstanceState The previously saved state of the Fragment.
      */
     @Override
-    public void onCreate (Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-    	Bundle bundle = getArguments();
-    	threadIndex = (int) bundle.getLong("id");
-    	isFavCom = bundle.getInt("favCom");
-    	thread = bundle.getParcelable("thread");
-    	// Assign custom adapter to the thread listView.
-    	adapter = new ThreadViewAdapter(getActivity(), thread, getFragmentManager(), threadIndex);
-    	if (isFavCom != -1) {
-    		connectHelper = ConnectivityHelper.getInstance();
-    		cache = CacheManager.getInstance();
-    		ArrayList<Comment> comments = cache.deserializeThreadCommentById(thread.getId());
-    		if (comments != null) {
-    			thread.getBodyComment().setChildren(comments);
-    		}
-    		if (!connectHelper.isConnected()) {
-    			Toaster.toastShort("No network connection.");
-    		}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        threadIndex = (int) bundle.getLong("id");
+        isFavCom = bundle.getInt("favCom");
+        thread = bundle.getParcelable("thread");
+        // Assign custom adapter to the thread listView.
+        adapter = new ThreadViewAdapter(getActivity(), thread, getFragmentManager(), threadIndex);
+        if (isFavCom != -1) {
+            connectHelper = ConnectivityHelper.getInstance();
+            cache = CacheManager.getInstance();
+            ArrayList<Comment> comments = cache.deserializeThreadCommentById(thread.getId());
+            if (comments != null) {
+                thread.getBodyComment().setChildren(comments);
+            }
+            if (!connectHelper.isConnected()) {
+                Toaster.toastShort("No network connection.");
+            }
         }
         if (prefManager == null) {
             prefManager = PreferencesManager.getInstance();
         }
     }
-    
+
     /**
      * Sets the proper sort option in our options menu.
-     * 
+     *
      * @param menu The fragment's menu.
      */
-	@Override
-	public void onPrepareOptionsMenu(Menu menu){
-		int sortType = prefManager.getCommentSort();
-		setSortCheck(sortType, menu);
-		super.onPrepareOptionsMenu(menu);
-	}
-	
-	/**
-	 * Checks the proper sort option in our options menu.
-	 * @param sort Code for the sort type.
-	 * @param menu The fragment's menu.
-	 */
-	private void setSortCheck(int sort, Menu menu){
-		MenuItem item;
-		switch(sort){
-		case SortUtil.SORT_DATE_NEWEST:
-			item = menu.findItem(R.id.comment_sort_date_new);
-			item.setChecked(true);
-			return;
-		case SortUtil.SORT_DATE_OLDEST:
-			item = menu.findItem(R.id.comment_sort_date_new);
-			item.setChecked(true);
-			return;
-		case SortUtil.SORT_LOCATION:
-			item = menu.findItem(R.id.comment_sort_location);
-			item.setChecked(true);
-			return;
-		case SortUtil.SORT_USER_SCORE_HIGHEST:
-			item = menu.findItem(R.id.comment_sort_score_high);
-			item.setChecked(true);
-			return;
-		case SortUtil.SORT_USER_SCORE_LOWEST:
-			item = menu.findItem(R.id.comment_sort_score_low);
-			item.setChecked(true);
-			return;
-		case SortUtil.SORT_IMAGE:
-			item = menu.findItem(R.id.comment_sort_image);
-			item.setChecked(true);
-			return;
-		default:
-			return;
-		}
-	}
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        int sortType = prefManager.getCommentSort();
+        setSortCheck(sortType, menu);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * Checks the proper sort option in our options menu.
+     *
+     * @param sort Code for the sort type.
+     * @param menu The fragment's menu.
+     */
+    private void setSortCheck(int sort, Menu menu) {
+        MenuItem item;
+        switch (sort) {
+            case SortUtil.SORT_DATE_NEWEST:
+                item = menu.findItem(R.id.comment_sort_date_new);
+                item.setChecked(true);
+                return;
+            case SortUtil.SORT_DATE_OLDEST:
+                item = menu.findItem(R.id.comment_sort_date_new);
+                item.setChecked(true);
+                return;
+            case SortUtil.SORT_LOCATION:
+                item = menu.findItem(R.id.comment_sort_location);
+                item.setChecked(true);
+                return;
+            case SortUtil.SORT_USER_SCORE_HIGHEST:
+                item = menu.findItem(R.id.comment_sort_score_high);
+                item.setChecked(true);
+                return;
+            case SortUtil.SORT_USER_SCORE_LOWEST:
+                item = menu.findItem(R.id.comment_sort_score_low);
+                item.setChecked(true);
+                return;
+            case SortUtil.SORT_IMAGE:
+                item = menu.findItem(R.id.comment_sort_image);
+                item.setChecked(true);
+                return;
+            default:
+                return;
+        }
+    }
 
     /**
      * Initializes the variables used in displaying the contents of a
@@ -193,12 +195,11 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
 
     /**
      * Set up the fragment UI.
-     * 
-     * @param inflater The LayoutInflater used to inflate the fragment's UI.
-     * @param container The parent View that the  fragment's UI is attached to.
+     *
+     * @param inflater           The LayoutInflater used to inflate the fragment's UI.
+     * @param container          The parent View that the  fragment's UI is attached to.
      * @param savedInstanceState The previously saved state of the fragment.
      * @return The View for the fragment's UI.
-     * 
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -209,7 +210,8 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
 
     /**
      * Sets up the menu for the fragment.
-     * @param menu The Menu item for the fragment itself.
+     *
+     * @param menu     The Menu item for the fragment itself.
      * @param inflater The inflater for inflating the fragment's menu.
      */
     @Override
@@ -234,14 +236,14 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
         threadView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         threadView.setOnItemClickListener(commentButtonListener);
-        
-		// Toggle PullToRefresh programatically on start
+
+        // Toggle PullToRefresh programatically on start
         if (!refresh && isFavCom != -1 && connectHelper.isConnected()) {
             pullToRefreshLayout.setRefreshing(true);
             ThreadManager.startGetComments(this, threadIndex);
             refresh = true;
         }
-        
+
         //threadView.setRefreshing();
         Fragment fav = getFragmentManager().findFragmentByTag("favThrFragment");
         if (fav != null) {
@@ -249,20 +251,20 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
         } else {
             container = R.id.fragment_container;
         }
-        
+
         updateReceiver = new BroadcastReceiver() {
 
-    		@Override
-    		public void onReceive(Context context, Intent intent) {
-    			if (isVisible() && connectHelper.getWasNotConnected() == true) {
-    				connectHelper.setWasNotConnected(false);
-    				UpdateDialogFragment fragment = new UpdateDialogFragment();
-    				fragment.show(getFragmentManager(), "updateDialogFrag");
-    			}
-    		}
-    		
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (isVisible() && connectHelper.getWasNotConnected() == true) {
+                    connectHelper.setWasNotConnected(false);
+                    UpdateDialogFragment fragment = new UpdateDialogFragment();
+                    fragment.show(getFragmentManager(), "updateDialogFrag");
+                }
+            }
+
         };
-        
+
         getActivity().getApplicationContext().registerReceiver(updateReceiver, new IntentFilter(ConnectivityBroadcastReceiver.UPDATE_FROM_SERVER_INTENT));
     }
 
@@ -271,8 +273,8 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
      * of location coordinates and action buttons.
      * This method sets that location field TextView in
      * the view.
-     * 
-     * @param view The View of the Comment that was selected.
+     *
+     * @param view    The View of the Comment that was selected.
      * @param comment The Comment itself that was selected by the user.
      */
     public void setLocationField(View view, Comment comment) {
@@ -300,14 +302,14 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     /**
      * Called when the star button is pressed on the selected comment. Save the
      * comment as favourite.
-     * 
+     *
      * @param comment The Comment to be added to favourites.
      */
     public void favouriteAComment(Comment comment) {
         Toast.makeText(getActivity(), "Comment saved to Favourites.", Toast.LENGTH_SHORT)
-        		.show();
+                .show();
         FavouritesLog log = FavouritesLog.getInstance(getActivity());
-        ThreadComment thread = new ThreadComment(comment,"");
+        ThreadComment thread = new ThreadComment(comment, "");
         thread.setId(Long.parseLong(comment.getId()));
         log.addFavComment(thread);
     }
@@ -315,7 +317,7 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     /**
      * Called when the star button is pressed in the selected comment when
      * comment is already starred. Remove the comment as favourite.
-     * 
+     *
      * @param id The ID of the Comment to be removed from favourites.
      */
     public void unfavouriteAComment(String id) {
@@ -329,8 +331,8 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
      * Set up and launch the postCommentFragment when the user wishes to reply
      * to a comment. The fragment takes as input the index of the thread and the
      * comment object to reply to.
-     * 
-     * @param comment The Comment being replied to.
+     *
+     * @param comment     The Comment being replied to.
      * @param threadIndex The index of the ThreadComment where the reply is taking place.
      */
     public void replyToComment(Comment comment, int threadIndex) {
@@ -341,7 +343,7 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
         fragment.setArguments(bundle);
         boolean fromFavs = false;
         Fragment fav = getFragmentManager().findFragmentByTag("favThrFragment");
-        if(fav != null){
+        if (fav != null) {
             fromFavs = true;
         }
         bundle.putBoolean("fromFavs", fromFavs);
@@ -352,8 +354,8 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     }
 
     /**
-     * OnItemClickListener for comments in the list view. on click, inflates an additional relative layout
-     * that contains the comment's location information and action buttons:
+     * OnItemClickListener for comments in the list view. on click, inflates an additional relative
+     * layout that contains the comment's location information and action buttons:
      * reply, favourite, edit (if user's comment). Contains listeners for the buttons.
      */
     private OnItemClickListener commentButtonListener = new OnItemClickListener() {
@@ -363,7 +365,7 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
                 return;
             }
             if (getArguments().getInt("favCom") == -1) {
-            	return;
+                return;
             }
             LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
@@ -447,20 +449,20 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
 
         }
     };
-    
+
     /**
      * Set up and launch the EditFragment for a given comment.
-     * 
+     *
      * @param comment The Comment that is being edited.
      */
-    private void editComment(Comment comment){
+    private void editComment(Comment comment) {
         Fragment fragment = new EditFragment();
         Bundle bundle = new Bundle();
         boolean fromFavs = false;
         bundle.putInt("threadIndex", threadIndex);
         bundle.putString("commentId", comment.getId());
         Fragment fav = getFragmentManager().findFragmentByTag("favThrFragment");
-        if(fav != null){
+        if (fav != null) {
             fromFavs = true;
         }
         bundle.putBoolean("fromFavs", fromFavs);
@@ -472,11 +474,11 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     }
 
     /**
-     * When a comment is clicked, this method deflates the additional 
+     * When a comment is clicked, this method deflates the additional
      * (location and button) layout of other comments in the list.
-     * 
+     * <p/>
      * TODO: make it also deflate the layouts of comments off the screen.
-     * 
+     *
      * @param position The position of the Comment that will not be deflated.
      */
     private void resetOtherCommentLayouts(int position) {
@@ -501,52 +503,50 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     /**
      * Determines which sorting option the user selected and sorts the comments
      * accordingly.
-     * 
+     *
      * @param item The MenuItem that was selected by the user.
-     * 
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	item.setChecked(true);
+        item.setChecked(true);
         switch (item.getItemId()) {
-        case (R.id.comment_sort_date_new):
-            // User wants to push newer comments to the top.
-            sortByTag(SortUtil.SORT_DATE_NEWEST);
-            return true;
-        case (R.id.comment_sort_date_old):
-            // User wants to push older comments to the top.
-            sortByTag(SortUtil.SORT_DATE_OLDEST);
-            return true;
-        case (R.id.comment_sort_image):
-            // User wants to push comments with images to the top.
-            sortByTag(SortUtil.SORT_IMAGE);
-            return true;
-        case (R.id.comment_sort_score_high):
-            // User wants to push comments with a high score/relevance to the
-            // top.
-            sortByTag(SortUtil.SORT_USER_SCORE_HIGHEST);
-            return true;
-        case (R.id.comment_sort_score_low):
-            // User wants to push comments with a low score/relevance to the
-            // top.
-            sortByTag(SortUtil.SORT_USER_SCORE_LOWEST);
-            return true;
-        case (R.id.comment_sort_location):
-            // User wants to push comments near a selected location to the top.
-            locSortFlag = 1;
-            this.getSortingLoc();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case (R.id.comment_sort_date_new):
+                // User wants to push newer comments to the top.
+                sortByTag(SortUtil.SORT_DATE_NEWEST);
+                return true;
+            case (R.id.comment_sort_date_old):
+                // User wants to push older comments to the top.
+                sortByTag(SortUtil.SORT_DATE_OLDEST);
+                return true;
+            case (R.id.comment_sort_image):
+                // User wants to push comments with images to the top.
+                sortByTag(SortUtil.SORT_IMAGE);
+                return true;
+            case (R.id.comment_sort_score_high):
+                // User wants to push comments with a high score/relevance to the
+                // top.
+                sortByTag(SortUtil.SORT_USER_SCORE_HIGHEST);
+                return true;
+            case (R.id.comment_sort_score_low):
+                // User wants to push comments with a low score/relevance to the
+                // top.
+                sortByTag(SortUtil.SORT_USER_SCORE_LOWEST);
+                return true;
+            case (R.id.comment_sort_location):
+                // User wants to push comments near a selected location to the top.
+                locSortFlag = 1;
+                this.getSortingLoc();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     /**
      * Given a sorting tag, perform sort, remember chosen sorting method and
      * reset the adapter to reflect changes.
-     * 
-     * @param tag
-     *            tag to sort by. Tags are defined in SortUtil.java
+     *
+     * @param tag tag to sort by. Tags are defined in SortUtil.java
      */
     private void sortByTag(int tag) {
         prefManager.setCommentSort(tag);
@@ -559,7 +559,6 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     /**
      * Sends the user into a CustomLocationFragment so they can choose a custom
      * location to sort comments by.
-     * 
      */
     private void getSortingLoc() {
         Bundle args = new Bundle();
@@ -570,15 +569,15 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
                 .addToBackStack(null).commit();
         getFragmentManager().executePendingTransactions();
     }
-    
+
     /**
      * Starts a new thread of execution for retrieving Comments from ElasticSearch.
      */
-	@Override
+    @Override
     public void reload() {
         ThreadManager.startGetComments(this, threadIndex);
     }
-    
+
     /**
      * On finishing pullToRefresh reload, notify the adapter.
      */
