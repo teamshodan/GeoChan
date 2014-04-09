@@ -368,7 +368,7 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
             LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
             // "+1" is necessary because of PullToRefresh
-            final Comment comment = (Comment) threadView.getItemAtPosition(position + 1);
+            final Comment comment = (Comment) threadView.getItemAtPosition(position);
             RelativeLayout relativeInflater = (RelativeLayout) view
                     .findViewById(R.id.relative_inflater);
             View child = inflater.inflate(R.layout.comment_buttons, null);
@@ -482,7 +482,7 @@ public class ThreadViewFragment extends Fragment implements OnRefreshListener, U
     private void resetOtherCommentLayouts(int position) {
         for (int i = 2; i < threadView.getCount() + 1; ++i) {
 
-            if (i == position + 1) {
+            if (i == position) {
                 continue;
             }
             View v = threadView.getChildAt(i);
