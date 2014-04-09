@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:id="@+id/comment_sort"
+          android:icon="@drawable/ic_sort_methods"
+          android:title="@string/thread_sort"
+          android:showAsAction="ifRoom">
+        
+        <menu>
+        <group android:checkableBehavior="single">
+        <item android:id="@+id/comment_sort_score_high"
+              android:title="@string/score_highest"/>
+        
+        <item android:id="@+id/comment_sort_score_low"
+              android:title="@string/score_lowest"/>
+        
+        <item android:id="@+id/comment_sort_date_new"
+              android:title="@string/date_new"/>
+        
+        <item android:id="@+id/comment_sort_date_old"
+              android:title="@string/date_old"/>
+        
+        <item android:id="@+id/comment_sort_location"
+              android:title="@string/sort_location"/>
+        
+        <item android:id="@+id/comment_sort_image"
+              android:title="@string/sort_image"/>
+        </group>
+        </menu>
+           
+        
+    </item>
+    
+</menu>

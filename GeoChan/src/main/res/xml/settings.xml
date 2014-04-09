@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:key="first_preferencescreen"
+    android:orientation="vertical" >
+    
+    <PreferenceCategory 
+        android:title="Settings" >
+        
+        <EditTextPreference
+            android:defaultValue="User"
+            android:dialogTitle="Username:"
+            android:key="username"
+            android:singleLine="true"
+            android:maxLength="15"
+            android:summary="@string/username"
+            android:title="Change Username" />
+        
+        <Preference
+            android:key="device_hash"
+            android:selectable="false"
+            android:summary="@string/device_hash"
+            android:title="Device Hash:" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

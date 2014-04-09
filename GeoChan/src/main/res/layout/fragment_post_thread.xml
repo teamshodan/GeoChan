@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/titlePrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/titleHint"
+        android:maxLength="45"
+        android:singleLine="true"
+        android:digits="@string/legal_chars" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/commentBody"
+        android:digits="@string/legal_chars"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/titlePrompt"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/commentHint"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <Button
+            android:id="@+id/location_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/rounded_button_selector"
+            android:onClick="changeLocation"
+            android:text="@string/location" />
+
+        <Button
+            android:id="@+id/attach_image_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/rounded_button_selector"
+            android:onClick="attachImage"
+            android:text="@string/attach_image" />
+
+        <Button
+            android:id="@+id/post_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/rounded_button_selector"
+            android:onClick="post"
+            android:text="@string/post" />
+    </LinearLayout>
+
+</RelativeLayout>

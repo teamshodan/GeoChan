@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/thread_view_comment_commentBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/thread_view_comment_thumbnail"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/lorem_ipsum" />
+    
+    <TextView
+        android:id="@+id/thread_view_comment_commentBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/thread_view_comment_commentBody"
+        android:layout_below="@+id/thread_view_comment_commentBody"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/placeholder_postby"
+        android:textColor="#00f" />
+
+    <TextView
+        android:id="@+id/thread_view_comment_commentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/thread_view_comment_commentBody"
+        android:layout_below="@+id/thread_view_comment_commentBy"
+        android:paddingLeft="5dp"
+        android:text="@string/placeholder_date"
+        android:textColor="#808080" />
+    
+    <ImageButton
+        android:id="@+id/thread_view_comment_thumbnail"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/thread_view_comment_commentBody"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_desc"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/rounded_corner_selector"
+        android:visibility="gone"
+        android:src="@null" />
+
+	<RelativeLayout
+	    android:id="@+id/relative_inflater"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/thread_view_comment_commentDate" />
+
+</RelativeLayout>

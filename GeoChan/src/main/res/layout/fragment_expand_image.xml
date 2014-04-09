@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/expanded_image_relative"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/expanded_image_box1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:background="@null"
+        android:contentDescription="@string/Image"
+        android:src="@drawable/expanded_image_rect" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:background="#88000000"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/Image"
+        android:src="@null" />
+
+    <ImageView
+        android:id="@+id/expanded_image_box2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.14"
+        android:background="@null"
+        android:contentDescription="@string/Image"
+        android:src="@drawable/expanded_image_rect" />
+    
+    <Button
+        android:id="@+id/save_image_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.06"
+        android:text="@string/save_image"
+        android:textColor="#E6E6E6"
+        android:background="@drawable/save_image_selector" />
+
+</LinearLayout>
