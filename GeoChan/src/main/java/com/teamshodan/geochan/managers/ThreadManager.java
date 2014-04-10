@@ -227,6 +227,7 @@ public class ThreadManager {
 							fragment.finishReload();
 						}
 					}
+                    recyclePostTask(postTaskComplete);
 					break;
 
 				case GET_THREADS_COMPLETE:
